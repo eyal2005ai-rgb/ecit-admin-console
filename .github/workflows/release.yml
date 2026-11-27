@@ -1,0 +1,90 @@
+# Builds the unsigned installers and publishes them as a GitHub release.
+# Push a tag like v0.1.0 to run it (or start it by hand from the Actions tab).
+# Releases are created as PRE-RELEASES; mark them as "latest" by hand once tested.
+name: Build and release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+      - name: Test
+        run: python -m pytest -q tests
+      - name: Build app
+        run: pyinstaller --noconfirm packaging/ecit_console.spec
+      - name: Build installer (Inno Setup)
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress }
+          & $iscc packaging\installer.iss
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: dist/ECIT-Admin-Console-*-setup.exe
+
+  mac:
+    strategy:
+      matrix:
+        include:
+          - runner: macos-latest        # Apple silicon (arm64)
+            dmg: ECIT-Admin-Console-0.1.0-mac-apple-silicon.dmg
+          - runner: macos-15-intel      # Intel (x86_64)
+            dmg: ECIT-Admin-Console-0.1.0-mac-intel.dmg
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build app and dmg
+        env:
+          DMG_NAME: ${{ matrix.dmg }}
+        run: bash packaging/build_mac.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.dmg }}
+          path: dist/${{ matrix.dmg }}
+
+  release:
+    needs: [windows, mac]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - name: Checksums
+        run: |
+          cd out
+          sha256sum * > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v0.1.0' }}
+          name: ECIT Admin Console ${{ github.ref_type == 'tag' && github.ref_name || 'v0.1.0' }}
+          prerelease: true
+          files: out/*
+          body: |
+            **Pre-release for testing.** Unsigned installers.
+
+            - Windows 10/11 (64-bit): `ECIT-Admin-Console-0.1.0-setup.exe`
+            - Mac with Apple silicon (M1 and later): `ECIT-Admin-Console-0.1.0-mac-apple-silicon.dmg`
+            - Mac with Intel processor: `ECIT-Admin-Console-0.1.0-mac-intel.dmg`
+
+            First run: register the app in your own tenant (Connections… in the app, or `create-app-registration.ps1`). See the README.
+            Verify downloads with `SHA256SUMS.txt`.

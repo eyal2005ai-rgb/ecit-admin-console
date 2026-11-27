@@ -1,0 +1,42 @@
+ECIT ADMIN CONSOLE - END USER LICENSE AGREEMENT
+Version 2026-11-draft-1   [DRAFT - TO BE REVIEWED BY A LAWYER BEFORE PUBLIC RELEASE]
+
+This End User License Agreement ("Agreement") is between you (the individual and the organization on whose behalf you use the software, together "you") and ECIT IT Services, an Israeli licensed dealer (osek murshe), contact: info@ecit.co.il ("ECIT").
+
+By installing, opening or using the ECIT Admin Console (the "Software") you agree to this Agreement. If you do not agree, do not install or use the Software.
+
+1. LICENSE
+ECIT grants you a free, non-exclusive, non-transferable, revocable license to install and use the Software to administer Microsoft 365 tenants that you own or are authorized to manage. You may not sell, rent, sublicense, decompile, reverse engineer or modify the Software, or remove or alter the ECIT name, logo, contact details or this Agreement from the Software or from any report it produces.
+
+2. THE SOFTWARE MAKES CHANGES TO YOUR MICROSOFT 365 TENANT
+Some functions of the Software (for example "Offboard employee") make real, immediate changes in your Microsoft 365 / Microsoft Entra tenant, including blocking accounts, resetting passwords, removing authentication methods and revoking sessions. Some of these changes cannot be undone automatically. You are solely responsible for:
+  (a) confirming you have the authority to perform each action;
+  (b) reviewing the preview ("dry run") shown before every change;
+  (c) choosing the correct user and tenant; and
+  (d) any consequence of the actions you perform, including loss of access, loss of data or business interruption.
+
+3. YOUR ACCOUNT, PERMISSIONS AND DATA
+The Software acts only with the permissions of the administrator who signs in, through Microsoft's own sign-in and consent process. ECIT does not receive, store or have access to your credentials, tokens or tenant data. Sign-in tokens are kept in memory only. Audit logs and reports are saved only on your computer.
+
+4. NO WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING FITNESS FOR A PARTICULAR PURPOSE, ACCURACY AND NON-INFRINGEMENT. ECIT does not warrant that the Software is error-free, that it will keep working after changes Microsoft makes to its services, or that it meets any legal or regulatory requirement that applies to you.
+
+5. LIMITATION OF LIABILITY
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, ECIT SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF DATA, LOSS OF ACCESS, LOSS OF PROFITS OR BUSINESS INTERRUPTION, ARISING FROM THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ANY CASE ECIT'S TOTAL LIABILITY SHALL NOT EXCEED ZERO NEW ISRAELI SHEKELS, THE AMOUNT YOU PAID FOR THE SOFTWARE.
+
+6. NO SUPPORT OBLIGATION
+ECIT is not obliged to provide support, updates or fixes. Professional services, if wanted, are available under a separate written agreement: info@ecit.co.il.
+
+7. TRADEMARKS
+Microsoft, Microsoft 365, Microsoft Entra and Outlook are trademarks of Microsoft Corporation. The Software is not made, endorsed or supported by Microsoft.
+
+8. TERMINATION
+This license ends automatically if you breach this Agreement. On termination you must stop using and delete the Software.
+
+9. GOVERNING LAW AND JURISDICTION
+This Agreement is governed by the laws of the State of Israel. The competent courts in Israel shall have exclusive jurisdiction over any dispute arising from it.
+
+10. CHANGES
+ECIT may publish new versions of this Agreement with new versions of the Software. A new version applies once you accept it in the Software.
+
+ECIT IT Services | info@ecit.co.il | ecit.co.il
